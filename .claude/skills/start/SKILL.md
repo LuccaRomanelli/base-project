@@ -62,14 +62,43 @@ Create tasks with dependencies:
 4. Tests (unit + E2E)
 5. QA verification
 
-### Step 6: Spawn Agents
+### Step 6: Spawn Parallel Agents
 
-Analyze which agents are needed and spawn them in parallel for independent tasks:
+Group tasks by dependency level and spawn agents in parallel:
 
-- Schema changes → `dba` + `supabase-backend`
-- UI work → `frontend-developer` + `ui-ux-specialist`
-- Tests → `test-specialist`
-- Quality gate → `qa` (after all others complete)
+**Level 0 (no dependencies):**
+
+- Schema design (dba)
+- E2E test specs (test-specialist)
+- UI mockups (ui-ux-specialist)
+
+**Level 1 (depends on Level 0):**
+
+- Backend services (supabase-backend) - needs schema
+- Frontend components (frontend-developer) - needs design
+
+**Level 2 (depends on Level 1):**
+
+- Integration (frontend-developer) - needs backend + frontend
+
+**Level 3 (final):**
+
+- QA verification (qa) - needs everything
+
+Spawn all Level 0 agents in a single message (parallel).
+Wait for completion, then spawn Level 1, and so on.
+
+**How to spawn in parallel:**
+
+Use multiple Task tool calls in a SINGLE message. Example:
+
+```
+Task 1: dba - "Create users_profile table with name, bio, avatar_url"
+Task 2: test-specialist - "Write failing E2E for profile edit flow"
+Task 3: ui-ux-specialist - "Design profile edit form layout"
+```
+
+All three start simultaneously and run independently.
 
 ### Step 7: Monitor Progress
 

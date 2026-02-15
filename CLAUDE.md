@@ -315,8 +315,22 @@ The software-architect analyzes each feature and spawns only the agents needed:
 
 ### Parallel Execution
 
-Independent tasks run in parallel (e.g., schema + UI tests can start simultaneously).
+Independent tasks run in parallel to maximize efficiency:
+
+1. **Spawn in single message**: Multiple Task tool calls = parallel execution
+2. **No shared context**: Each agent reads from files, not memory
+3. **File-based handoff**: Results written to files, not passed in messages
+4. **Orchestrator monitors**: software-architect tracks TaskList for completion
+
 Dependent tasks are ordered: schema → backend → frontend → tests → QA.
+
+### Message Efficiency
+
+Keep messages small to avoid context exhaustion:
+
+- Reference files by path instead of copying content
+- Use task IDs instead of full descriptions
+- Let agents read CLAUDE.md for conventions (don't repeat)
 
 ### Communication
 

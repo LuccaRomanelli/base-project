@@ -65,3 +65,90 @@ Always follow this order for dependent tasks:
 4. Frontend components
 5. Tests
 6. QA verification
+
+## Parallel Agent Execution
+
+### Spawning Agents in Parallel
+
+To spawn multiple agents in parallel, use multiple Task tool calls in a SINGLE message:
+
+Example (software-architect spawning 3 agents):
+
+- Agent 1: dba - Create database schema
+- Agent 2: test-specialist - Write failing E2E tests
+- Agent 3: ui-ux-specialist - Design component layouts
+
+All three agents start simultaneously and run independently.
+
+### When to Parallelize
+
+| Scenario                             | Parallel? | Reason                         |
+| ------------------------------------ | --------- | ------------------------------ |
+| Schema + E2E tests                   | Yes       | No data dependency             |
+| Backend service + Frontend component | Yes       | Can work from spec             |
+| Migration + RLS policies             | No        | RLS depends on tables          |
+| Component + Component tests          | No        | Tests need component           |
+
+### Context Isolation
+
+Each agent:
+
+- Starts with fresh context (no shared memory)
+- Reads from files (source of truth)
+- Writes results to files
+- Returns summary to orchestrator
+
+This prevents context window exhaustion in long-running teams.
+
+## Team Messaging
+
+### Message Passing Pattern
+
+Agents communicate through the task system and SendMessage tool:
+
+1. **Task-based**: Update task status, add comments
+2. **Direct message**: Use SendMessage for urgent coordination
+3. **File-based**: Write results to files, other agents read
+
+### Avoiding Context Bloat
+
+Instead of passing large context through messages:
+
+- BAD: "Here's the entire component code..."
+- GOOD: "Component created at src/components/items/ItemCard.tsx"
+
+- BAD: "The schema includes these 50 fields..."
+- GOOD: "Schema created. Run `npm run db:types` to see types."
+
+### Orchestrator Pattern (software-architect)
+
+The software-architect acts as orchestrator:
+
+1. **Decompose**: Break feature into independent tasks
+2. **Assign**: Spawn agents in parallel for independent tasks
+3. **Monitor**: Check task completion via TaskList
+4. **Coordinate**: Spawn dependent tasks when blockers resolve
+5. **Verify**: Spawn QA agent for final verification
+
+### Example Flow
+
+Feature: "Add user profile editing"
+
+Round 1 (parallel):
+
+- dba: Create profile_updates table
+- test-specialist: Write failing E2E for profile edit
+- ui-ux-specialist: Design profile edit form
+
+Round 2 (after Round 1 completes):
+
+- supabase-backend: Create profile service (needs schema)
+- frontend-developer: Implement profile form (needs design)
+
+Round 3 (after Round 2):
+
+- frontend-developer: Wire up form to service
+
+Round 4 (final):
+
+- qa: Run all checks, create PR
