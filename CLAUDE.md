@@ -292,6 +292,8 @@ Enforced by commitlint via Husky commit-msg hook.
 - **Pre-push**: `npm run typecheck`
 - **Commit-msg**: commitlint (conventional commits)
 
+**IMPORTANT**: Never use `--no-verify` to skip hooks. All commits must pass pre-commit, commit-msg, and pre-push hooks. If a hook fails, fix the underlying issue instead of bypassing it.
+
 ### PR Creation
 
 PRs include:
