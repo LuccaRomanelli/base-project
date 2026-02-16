@@ -7,10 +7,10 @@ echo "==> Installing project dependencies..."
 brew install supabase/tap/supabase 2>&1 | cat || true
 
 # Node dependencies
-npm install
+bun install
 
 # Husky git hooks
-npx husky
+bunx husky
 
 # Trust mise.toml
 mise trust 2>/dev/null || true

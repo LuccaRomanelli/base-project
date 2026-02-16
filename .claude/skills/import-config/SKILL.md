@@ -89,5 +89,5 @@ cp -r /home/lcc/base-project/.husky/ TARGET/.husky/
 After copying, run:
 
 ```bash
-cd TARGET && npm install && npx husky
+cd TARGET && bun install && bunx husky
 ```

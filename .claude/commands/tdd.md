@@ -34,9 +34,9 @@ Ask if unclear:
 - Write test that describes expected behavior
 - Run test and confirm it FAILS:
   ```bash
-  npm run test -- [test-file]
+  bun run test -- [test-file]
   # or
-  npm run test:e2e -- [test-file]
+  bun run test:e2e -- [test-file]
   ```
 
 ### 4. Implement Minimum Code (GREEN)
@@ -47,9 +47,9 @@ Ask if unclear:
 ### 5. Verify
 
 ```bash
-npm run test          # All tests pass
-npm run typecheck     # Types correct
-npm run lint          # Code clean
+bun run test          # All tests pass
+bun run typecheck     # Types correct
+bun run lint          # Code clean
 ```
 
 ### 6. Refactor

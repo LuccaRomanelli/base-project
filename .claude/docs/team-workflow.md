@@ -82,12 +82,12 @@ All three agents start simultaneously and run independently.
 
 ### When to Parallelize
 
-| Scenario                             | Parallel? | Reason                         |
-| ------------------------------------ | --------- | ------------------------------ |
-| Schema + E2E tests                   | Yes       | No data dependency             |
-| Backend service + Frontend component | Yes       | Can work from spec             |
-| Migration + RLS policies             | No        | RLS depends on tables          |
-| Component + Component tests          | No        | Tests need component           |
+| Scenario                             | Parallel? | Reason                |
+| ------------------------------------ | --------- | --------------------- |
+| Schema + E2E tests                   | Yes       | No data dependency    |
+| Backend service + Frontend component | Yes       | Can work from spec    |
+| Migration + RLS policies             | No        | RLS depends on tables |
+| Component + Component tests          | No        | Tests need component  |
 
 ### Context Isolation
 
@@ -118,7 +118,7 @@ Instead of passing large context through messages:
 - GOOD: "Component created at src/components/items/ItemCard.tsx"
 
 - BAD: "The schema includes these 50 fields..."
-- GOOD: "Schema created. Run `npm run db:types` to see types."
+- GOOD: "Schema created. Run `bun run db:types` to see types."
 
 ### Orchestrator Pattern (software-architect)
 

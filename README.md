@@ -28,14 +28,14 @@ Starting new projects from scratch means re-establishing conventions, agent conf
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Start Supabase + Vite dev server
-npm run dev:full
+bun run dev:full
 
 # Run tests
-npm run test        # Unit tests
-npm run test:e2e    # E2E tests
+bun run test        # Unit tests
+bun run test:e2e    # E2E tests
 ```
 
 ## Agent Team
@@ -55,6 +55,7 @@ npm run test:e2e    # E2E tests
 
 ## Skills & Commands
 
+- `/dev` - Full developer workflow: understand, explore, plan, implement with TDD, review, and create PR
 - `/start` - Kickoff a new feature (generates PRD, creates team, decomposes tasks)
 - `/tdd` - Run the TDD loop for a feature
 - `/create-pr` - Create a PR with test results and screenshots
@@ -78,7 +79,7 @@ This copies all agents, skills, commands, docs, and test infrastructure to your 
 ├── .claude/
 │   ├── agents/        # 10 specialized AI agents
 │   ├── commands/      # /tdd, /create-pr
-│   ├── skills/        # /start, /prd, /import-config, /ralph
+│   ├── skills/        # /dev, /start, /prd, /import-config, /ralph
 │   └── docs/          # Team workflow, TDD guide, testing conventions
 ├── src/
 │   ├── components/    # React components (shared, auth, items, admin)

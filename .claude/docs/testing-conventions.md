@@ -7,20 +7,20 @@
 - Pure functions, utilities, mappers, validators
 - No external dependencies (mock everything)
 - Fast execution (< 1s per test)
-- Run with: `npm run test`
+- Run with: `bun run test`
 
 ### Integration Tests (`tests/integration/`)
 
 - Service layer + database interactions
 - Uses testcontainers or local Supabase
 - Real database queries, real responses
-- Run with: `npm run test:integration`
+- Run with: `bun run test:integration`
 
 ### E2E Tests (`tests/e2e/specs/`)
 
 - Full user flows through the browser
 - Uses Playwright + real app + real database
-- Run with: `npm run test:e2e`
+- Run with: `bun run test:e2e`
 
 ## Anti-Flakiness Rules (The 10 Commandments)
 

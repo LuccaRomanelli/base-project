@@ -6,10 +6,10 @@ This document describes the end-to-end test flows for the base project.
 
 Test users are created in `global-setup.ts` and defined in `fixtures/auth.fixture.ts`:
 
-| User         | Email           | Password       | Role  |
-| ------------ | --------------- | -------------- | ----- |
-| Admin        | admin@test.com  | AdminPass123!  | admin |
-| Regular User | user@test.com   | UserPass123!   | user  |
+| User         | Email          | Password      | Role  |
+| ------------ | -------------- | ------------- | ----- |
+| Admin        | admin@test.com | AdminPass123! | admin |
+| Regular User | user@test.com  | UserPass123!  | user  |
 
 ## Test Flows
 
@@ -71,9 +71,9 @@ Located in `helpers/`:
 ## Running Tests
 
 ```bash
-npm run test:e2e          # Run all E2E tests
-npm run test:e2e:ui       # Interactive UI mode
-npm run test:e2e:debug    # Step-through debugger
+bun run test:e2e          # Run all E2E tests
+bun run test:e2e:ui       # Interactive UI mode
+bun run test:e2e:debug    # Step-through debugger
 ```
 
 ## Debugging Tips
@@ -81,4 +81,4 @@ npm run test:e2e:debug    # Step-through debugger
 1. Use `test.only()` to run a single test
 2. Use `page.pause()` to pause execution
 3. Check `test-results/` for screenshots and traces
-4. Use `npm run test:e2e:ui` for visual debugging
+4. Use `bun run test:e2e:ui` for visual debugging

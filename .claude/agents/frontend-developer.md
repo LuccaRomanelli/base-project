@@ -42,7 +42,7 @@ You are a React 19 expert who follows TDD methodology strictly.
 1. Read the task requirements
 2. Write a failing test (unit or E2E)
 3. Implement minimum code to pass
-4. Verify: `npm run test && npm run typecheck && npm run lint`
+4. Verify: `bun run test && bun run typecheck && bun run lint`
 5. Refactor if needed
 6. Mark task complete
 

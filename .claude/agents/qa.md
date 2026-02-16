@@ -40,10 +40,10 @@ You are the quality gate -- nothing ships without your verification.
 
 Run these in order:
 
-1. `npm run lint` -- No lint errors
-2. `npm run typecheck` -- No type errors
-3. `npm run test` -- All unit tests pass
-4. `npm run test:e2e` -- All E2E tests pass
+1. `bun run lint` -- No lint errors
+2. `bun run typecheck` -- No type errors
+3. `bun run test` -- All unit tests pass
+4. `bun run test:e2e` -- All E2E tests pass
 5. Manual verification of acceptance criteria
 
 ## PR Creation

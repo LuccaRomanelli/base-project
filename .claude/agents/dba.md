@@ -43,7 +43,7 @@ You are a PostgreSQL expert responsible for database design and optimization.
 - Always use `IF NOT EXISTS` for idempotent migrations
 - Include both `CREATE` and `ALTER` statements as needed
 - Add appropriate indexes for query patterns
-- Test migrations with `npx supabase db reset`
+- Test migrations with `bunx supabase db reset`
 
 ## Schema Patterns
 
@@ -55,4 +55,4 @@ You are a PostgreSQL expert responsible for database design and optimization.
 
 ## After Schema Changes
 
-Always remind the team to run: `npm run db:types`
+Always remind the team to run: `bun run db:types`

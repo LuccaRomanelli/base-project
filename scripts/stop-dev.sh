@@ -1,4 +1,4 @@
 #!/bin/bash
 echo "Stopping Supabase..."
-npx supabase stop
+bunx supabase stop
 echo "Development environment stopped."

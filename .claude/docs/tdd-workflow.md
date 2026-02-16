@@ -36,7 +36,7 @@ describe('itemSchema', () => {
 Run and confirm failure:
 
 ```bash
-npm run test -- tests/unit/validators.test.ts
+bun run test -- tests/unit/validators.test.ts
 ```
 
 ### Step 3: Implement Minimum Code (GREEN)
@@ -54,9 +54,9 @@ export const itemSchema = z.object({
 ### Step 4: Verify
 
 ```bash
-npm run test          # All tests pass
-npm run typecheck     # Types correct
-npm run lint          # Code clean
+bun run test          # All tests pass
+bun run typecheck     # Types correct
+bun run lint          # Code clean
 ```
 
 ### Step 5: Refactor

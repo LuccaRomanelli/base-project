@@ -57,6 +57,7 @@ RUN brew install \
 ENV MISE_DATA_DIR=/home/$USERNAME/.local/share/mise
 ENV PATH="${MISE_DATA_DIR}/shims:${PATH}"
 RUN mise use --global node@24
+RUN mise use --global bun@latest
 
 # Claude Code CLI
 RUN curl -fsSL https://claude.ai/install.sh | bash

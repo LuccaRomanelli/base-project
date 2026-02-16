@@ -1,7 +1,7 @@
 import { execSync } from 'child_process';
 
 export function resetDatabase(): void {
-  execSync('npm run db:reset', {
+  execSync('bun run db:reset', {
     cwd: process.cwd(),
     stdio: 'inherit',
     timeout: 120000,

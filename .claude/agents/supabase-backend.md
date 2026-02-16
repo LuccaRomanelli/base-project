@@ -43,7 +43,7 @@ You are a Supabase expert responsible for all backend functionality.
 - Use mappers for type conversion (DB <-> App)
 - RLS policies must be tested
 - Edge Functions live in `supabase/functions/`
-- Always regenerate types after schema changes: `npm run db:types`
+- Always regenerate types after schema changes: `bun run db:types`
 
 ## Security
 

@@ -33,7 +33,7 @@ async function ensureSupabaseRunning(): Promise<void> {
     console.log('Supabase is not running. Starting...');
   }
 
-  const supabaseProcess = spawn('npx', ['supabase', 'start'], {
+  const supabaseProcess = spawn('bunx', ['supabase', 'start'], {
     cwd: process.cwd(),
     stdio: 'inherit',
     detached: true,
@@ -60,7 +60,7 @@ async function resetDatabase(): Promise<void> {
   try {
     console.log('  Running migrations...');
     try {
-      execSync('npx supabase db reset', {
+      execSync('bunx supabase db reset', {
         cwd: process.cwd(),
         stdio: 'inherit',
         timeout: 300000,
@@ -127,7 +127,7 @@ async function updateEnvLocal(): Promise<void> {
   console.log('  Updating .env.local with Supabase credentials...');
 
   try {
-    const statusOutput = execSync('npx supabase status --output json 2>/dev/null', {
+    const statusOutput = execSync('bunx supabase status --output json 2>/dev/null', {
       cwd: process.cwd(),
       encoding: 'utf8',
     });

@@ -13,10 +13,10 @@ Create a pull request for the current feature branch.
 ### 1. Run All Checks
 
 ```bash
-npm run lint
-npm run typecheck
-npm run test
-npm run test:e2e
+bun run lint
+bun run typecheck
+bun run test
+bun run test:e2e
 ```
 
 If any check fails, report the error and stop.

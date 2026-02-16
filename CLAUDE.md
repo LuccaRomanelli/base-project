@@ -3,26 +3,26 @@
 ## Build & Development Commands
 
 ```bash
-npm run dev              # Vite dev server (port 5173)
-npm run dev:full         # Start Supabase + Vite (recommended)
-npm run dev:stop         # Stop Supabase
-npm run build            # TypeScript check + production build
-npm run typecheck        # Type-check without emitting
-npm run lint             # ESLint check
-npm run lint:fix         # ESLint auto-fix
-npm run format           # Prettier format all files
-npm run format:check     # Prettier check formatting
-npm run test             # Vitest unit tests (single run)
-npm run test:watch       # Vitest watch mode
-npm run test:coverage    # Unit tests with coverage
-npm run test:integration # Integration tests (testcontainers)
-npm run test:e2e         # Playwright E2E tests
-npm run test:e2e:ui      # Playwright interactive UI
-npm run test:e2e:debug   # Playwright step-through debug
-npm run db:reset         # Reset local Supabase database
-npm run db:types         # Generate TypeScript types from schema
-npm run db:studio        # Open Supabase Studio (port 54323)
-npm run deploy           # Full production deploy
+bun run dev              # Vite dev server (port 5173)
+bun run dev:full         # Start Supabase + Vite (recommended)
+bun run dev:stop         # Stop Supabase
+bun run build            # TypeScript check + production build
+bun run typecheck        # Type-check without emitting
+bun run lint             # ESLint check
+bun run lint:fix         # ESLint auto-fix
+bun run format           # Prettier format all files
+bun run format:check     # Prettier check formatting
+bun run test             # Vitest unit tests (single run)
+bun run test:watch       # Vitest watch mode
+bun run test:coverage    # Unit tests with coverage
+bun run test:integration # Integration tests (testcontainers)
+bun run test:e2e         # Playwright E2E tests
+bun run test:e2e:ui      # Playwright interactive UI
+bun run test:e2e:debug   # Playwright step-through debug
+bun run db:reset         # Reset local Supabase database
+bun run db:types         # Generate TypeScript types from schema
+bun run db:studio        # Open Supabase Studio (port 54323)
+bun run deploy           # Full production deploy
 ```
 
 ## TDD Workflow (MANDATORY)
@@ -48,9 +48,9 @@ Write the minimum code to make the test pass. No more, no less.
 ### 4. Verify
 
 ```bash
-npm run test          # Unit tests pass
-npm run typecheck     # Types are correct
-npm run lint          # Code is clean
+bun run test          # Unit tests pass
+bun run typecheck     # Types are correct
+bun run lint          # Code is clean
 ```
 
 ### 5. Refactor
@@ -60,6 +60,39 @@ Clean up while keeping tests green. Improve naming, extract patterns, remove dup
 ### 6. Loop
 
 Go back to step 1 for the next piece of functionality.
+
+## Developer Workflow (`/dev`)
+
+The `/dev` skill is the primary way to implement features end-to-end. It orchestrates the full workflow from free-text description to merged PR using specialist agent teams.
+
+### Usage
+
+```
+/dev Add a search bar to the items page
+```
+
+### 6 Phases with Developer Gates
+
+Every phase has a confirmation gate — the workflow never proceeds without explicit developer approval.
+
+1. **UNDERSTAND** — Parse input into structured summary (feature, affected layers, assumptions). Developer confirms scope and chooses level (MVP / Full / Backend only / UI only).
+2. **CODEBASE EXPLORATION** — Spawn research agents to map affected files, find reusable code, and identify patterns. Developer confirms scope report.
+3. **PLAN & TEAM DESIGN** — Select specialist agents based on affected layers, write a task contract to `tasks/plans/<slug>-contract.md` with dependency-ordered tasks. Developer approves the plan.
+4. **IMPLEMENTATION** — Create feature branch, spawn agent team, execute tasks with TDD in dependency order (Level 0 parallel → Level 1 → ...). Run full verification. Developer confirms results.
+5. **CODE REVIEW** — Spawn QA + security-specialist + devils-advocate in parallel. Fix must-fix items. Developer approves review results.
+6. **PR CREATION** — Commit, push, create PR with full documentation (changes by layer, test results, review results). Developer confirms completion.
+
+### Agent Selection
+
+Agents are selected based on which layers the feature touches:
+
+- Database schema → `dba`
+- RLS policies / services / mappers → `supabase-backend`
+- Components / routes / hooks → `frontend-developer`
+- Styling / accessibility → `ui-ux-specialist`
+- Tests → `test-specialist`
+- Cross-stack issues → `tech-lead`
+- Always in review: `qa`, `security-specialist`, `devils-advocate`
 
 ## Architecture Overview
 
@@ -82,7 +115,7 @@ src/
 ├── main.tsx              # Entry point with providers
 ├── index.css             # Tailwind imports
 ├── types.ts              # App-level TypeScript interfaces
-├── types/supabase.ts     # Auto-generated DB types (npm run db:types)
+├── types/supabase.ts     # Auto-generated DB types (bun run db:types)
 ├── lib/validators.ts     # Zod schemas for shared validation
 ├── services/
 │   ├── supabase.ts       # Supabase client initialization
@@ -182,7 +215,7 @@ const form = useForm({
 
 1. **No `any`** - ESLint enforces `@typescript-eslint/no-explicit-any: error`
 2. **Strict mode** - `tsconfig.json` has `strict: true`, `noUncheckedIndexedAccess: true`
-3. **DB types** - Always regenerate after schema changes: `npm run db:types`
+3. **DB types** - Always regenerate after schema changes: `bun run db:types`
 4. **Zod schemas** - Validate at system boundaries (forms, API responses)
 
 ### DB Types vs App Types
@@ -197,9 +230,9 @@ const form = useForm({
 
 | Level       | When                                | Location             | Command                    |
 | ----------- | ----------------------------------- | -------------------- | -------------------------- |
-| Unit        | Pure logic, utils, mappers          | `tests/unit/`        | `npm run test`             |
-| Integration | Service + DB, complex queries       | `tests/integration/` | `npm run test:integration` |
-| E2E         | User flows, multi-page interactions | `tests/e2e/specs/`   | `npm run test:e2e`         |
+| Unit        | Pure logic, utils, mappers          | `tests/unit/`        | `bun run test`             |
+| Integration | Service + DB, complex queries       | `tests/integration/` | `bun run test:integration` |
+| E2E         | User flows, multi-page interactions | `tests/e2e/specs/`   | `bun run test:e2e`         |
 
 ### E2E Test Structure
 
@@ -289,7 +322,7 @@ Enforced by commitlint via Husky commit-msg hook.
 ### Hooks
 
 - **Pre-commit**: lint-staged (ESLint + Prettier on staged files)
-- **Pre-push**: `npm run typecheck`
+- **Pre-push**: `bun run typecheck`
 - **Commit-msg**: commitlint (conventional commits)
 
 **IMPORTANT**: Never use `--no-verify` to skip hooks. All commits must pass pre-commit, commit-msg, and pre-push hooks. If a hook fails, fix the underlying issue instead of bypassing it.

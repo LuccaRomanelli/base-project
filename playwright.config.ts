@@ -26,7 +26,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'unset VITE_SUPABASE_URL VITE_SUPABASE_ANON_KEY && npm run dev -- --port 5173',
+    command: 'unset VITE_SUPABASE_URL VITE_SUPABASE_ANON_KEY && bun run dev -- --port 5173',
     url: 'http://localhost:5173',
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,

@@ -5,11 +5,11 @@ echo "Starting development environment..."
 
 # Start Supabase
 echo "Starting Supabase..."
-npx supabase start
+bunx supabase start
 
 # Get Supabase status and update .env.local
 echo "Updating .env.local..."
-STATUS=$(npx supabase status --output json 2>/dev/null)
+STATUS=$(bunx supabase status --output json 2>/dev/null)
 JSON_START=$(echo "$STATUS" | grep -n '{' | head -1 | cut -d: -f1)
 if [ -n "$JSON_START" ]; then
   STATUS=$(echo "$STATUS" | tail -n +"$JSON_START")
@@ -27,4 +27,4 @@ echo ".env.local updated"
 
 # Start Vite
 echo "Starting Vite dev server..."
-npm run dev
+bun run dev
